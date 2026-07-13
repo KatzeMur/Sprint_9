@@ -2,21 +2,24 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ develop ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.14'
+        python-version: '3.10'
+    
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser
     
     - name: Install dependencies
       run: |
@@ -24,7 +27,7 @@ jobs:
     
     - name: Run tests
       run: |
-        pytest tests/ --alluredir=allure-results
+        pytest tests/ -v --alluredir=allure-results
     
     - name: Generate Allure Report
       run: |
@@ -32,7 +35,7 @@ jobs:
         allure generate allure-results -o allure-report
     
     - name: Upload Allure Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: allure-report
         path: allure-report

@@ -1,6 +1,7 @@
 import pytest
 import time
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.register_page import RegisterPage
@@ -9,7 +10,13 @@ from data.user_data import REGISTER_USER
 
 @pytest.fixture(scope="function")
 def driver():
-    driver = webdriver.Chrome()
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1080")
+    driver = webdriver.Chrome(options=options)
     yield driver
     driver.quit()
 
