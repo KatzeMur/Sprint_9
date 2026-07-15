@@ -23,5 +23,5 @@ COOKING_TIME_INPUT = "//div[text()='Время приготовления']/pare
 DESCRIPTION_TEXTAREA = "//textarea[contains(@class, 'styles_textareaField')]"
 FILE_UPLOAD_INPUT = "//input[@type='file']"
 CREATE_RECIPE_BUTTON = "//button[text()='Создать рецепт']"
-RECIPE_PAGE_LOADED = "//div[text()='Название рецепта']"
+RECIPE_PAGE_LOADED = "//div[@class='styles_inputLabelText__WsyhD' and text()='Название рецепта']"
 RECIPE_CARD_TITLE = "//h1[contains(@class, 'styles_single-card__title') and text()='{}']"

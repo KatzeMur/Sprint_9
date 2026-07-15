@@ -2,8 +2,6 @@ import pytest
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from pages.register_page import RegisterPage
 from data.user_data import REGISTER_USER
 
@@ -32,5 +30,5 @@ def create_test_user(driver):
     register_page.open()
     register_page.fill_registration_form(**user_data)
     register_page.click_create_account()
-    WebDriverWait(driver, 10).until(EC.url_contains("/signin"))
+    register_page.wait_for_signin_page()
     return user_data

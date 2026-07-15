@@ -1,11 +1,13 @@
 import os
 import time
+import allure
 import pytest
 from pages.recipe_page import RecipePage
 from pages.login_page import LoginPage
 
 
 class TestCreateRecipe:
+    @allure.title("Создание рецепта")
     def test_create_recipe_success(self, driver, create_test_user):
         login_page = LoginPage(driver)
         login_page.open()
@@ -29,6 +31,5 @@ class TestCreateRecipe:
         recipe_page.upload_photo(photo_path)
         recipe_page.click_create()
 
-        recipe_page.wait_for_recipe_card(recipe_name)
         assert recipe_page.is_recipe_created(recipe_name)
         

@@ -47,3 +47,4 @@ class BasePage:
             EC.visibility_of_element_located((By.XPATH, locator))
         )
         return element.is_displayed()
+    
