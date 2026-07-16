@@ -23,7 +23,7 @@ from pages.base_page import BasePage
 
 class RecipePage(BasePage):
     def open(self):
-        self.driver.get(f"{BASE_URL}/recipes/create")
+        self.open_url(f"{BASE_URL}/recipes/create")
 
     @allure.step("Заполнение названия рецепта")
     def fill_recipe_name(self, name):

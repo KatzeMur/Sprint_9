@@ -11,7 +11,7 @@ from pages.base_page import BasePage
 
 class LoginPage(BasePage):
     def open(self):
-        self.driver.get(f"{BASE_URL}/signin")
+        self.open_url(f"{BASE_URL}/signin")
 
     @allure.step("Заполнение формы авторизации")
     def fill_login_form(self, email, password):

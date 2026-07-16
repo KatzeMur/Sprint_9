@@ -13,7 +13,7 @@ from pages.base_page import BasePage
 
 class RegisterPage(BasePage):
     def open(self):
-        self.driver.get(f"{BASE_URL}/signup")
+        self.open_url(f"{BASE_URL}/signup")
 
     @allure.step("Заполнение формы регистрации")
     def fill_registration_form(self, first_name, last_name, username, email, password):
