@@ -1,0 +1,31 @@
+services:
+  selenoid:
+    image: aerokube/selenoid:latest
+    container_name: selenoid
+    volumes:
+      - ./:/opt/selenium/
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - OVERRIDE_VIDEO_OUTPUT_DIR=/opt/selenium/video
+    command: ["-conf", "/opt/selenium/browsers.json", "-video-output-dir", "/opt/selenium/video"]
+    ports:
+      - "4444:4444"
+    networks:
+      - selenoid-network
+
+  tests:
+    build: .
+    container_name: tests
+    depends_on:
+      - selenoid
+    environment:
+      - SELENOID_HOST=selenoid
+    volumes:
+      - ./allure-results:/app/allure-results
+    command: pytest tests/ --alluredir=allure-results
+    networks:
+      - selenoid-network
+
+networks:
+  selenoid-network:
+    driver: bridge
